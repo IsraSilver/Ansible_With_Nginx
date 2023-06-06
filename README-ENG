@@ -1,0 +1,53 @@
+# Nginx Configuration with Firewall Rules
+
+This project contains an Ansible playbook to configure the Nginx web server and open ports in the firewall.
+
+## Requirements
+
+To use this playbook, you'll need:
+
+- Ansible installed on your control host.
+- A remote host installed and accessible where the configuration will be applied.
+- A hosts.txt file specifying the IP address of the remote host.
+
+## Usage
+
+1. Clone this repository to your control host:
+
+git clone https://github.com/your_username/nginx-ansible.git
+
+2. Navigate to the project directory:
+
+cd nginx-ansible
+
+3. Edit the hosts.txt file and add the IP address of your remote host.
+
+4. Run the playbook with the following command:
+
+ansible-playbook playbook.yml --ask-become-pass
+
+When prompted, enter the password for privilege escalation (sudo).
+
+5. Ansible will configure Nginx on the remote host and open ports 22, 80, and 443 in the firewall.
+
+## Project Structure
+
+nginx-ansible/
+   playbook.yml
+   hosts.txt
+   README
+   ansible.cfg
+
+- `playbook.yml`: The main Ansible playbook that contains tasks for configuring Nginx and opening ports in the firewall.
+- `hosts.txt`: Ansible inventory file specifying the remote hosts to run the playbook against.
+- `README.md`: The project's description file, including usage instructions and project structure.
+
+## Extension and Customization
+
+You can extend this project by adding additional tasks and configurations to the playbook to further customize your Nginx server.
+
+- Add more tasks to install and configure additional Nginx components or plugins.
+- Modify the `nginx.conf.j2` file (if needed) to customize a more complex Nginx configuration.
+
+
+

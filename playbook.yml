@@ -1,0 +1,50 @@
+---
+- name: Configure Nginx and firewall rules
+  hosts: all
+  become: true
+  vars:
+    firewall_ports:
+      - 22
+      - 80
+      - 443
+
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Configure Nginx
+      copy:
+        content: |
+          server {
+            listen 80;
+            server_name example.com;
+            root /var/www/html;
+          }
+        dest: /etc/nginx/nginx.conf
+
+    - name: Enable Nginx service
+      service:
+        name: nginx
+        state: started
+        enabled: true
+
+    - name: Open firewall ports
+      ufw:
+        rule: allow
+        port: "{{ item }}"
+        state: enabled
+      with_items: "{{ firewall_ports }}"
+      notify: Reload firewall
+
+  handlers:
+    - name: Reload firewall
+      service:
+        name: ufw
+        state: reloaded
+
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
