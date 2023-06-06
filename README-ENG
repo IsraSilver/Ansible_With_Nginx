@@ -14,7 +14,7 @@ To use this playbook, you'll need:
 
 1. Clone this repository to your control host:
 
-git clone https://github.com/your_username/nginx-ansible.git
+git clone https://github.com/IsraSilver/nginx-ansible.git
 
 2. Navigate to the project directory:
 
